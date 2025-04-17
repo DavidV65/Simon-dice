@@ -2,19 +2,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Simón Dice</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Juego: Adivina el Número</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Simón Dice</h1>
-    <div id="game">
-        <div class="btn" id="green"></div>
-        <div class="btn" id="red"></div>
-        <div class="btn" id="yellow"></div>
-        <div class="btn" id="blue"></div>
-    </div>
-    <h2 id="level-title">Presiona cualquier tecla para comenzar</h2>
-    <script src="script.js"></script>
+  <div class="game-container">
+    <h1>Adivina el Número</h1>
+    <p>Ingresa un número del 1 al 100</p>
+    <input type="number" id="guessInput" min="1" max="100">
+    <br>
+    <button onclick="checkGuess()">Adivinar</button>
+    <p class="message" id="message"></p>
+    <p>Intentos restantes: <span id="attempts">10</span></p>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
