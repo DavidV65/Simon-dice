@@ -1,20 +1,20 @@
+
 let buttonColors = ["red", "blue", "green", "yellow"];
 let gamePattern = [];
 let userClickedPattern = [];
 let started = false;
 let level = 0;
 
-document.body.addEventListener("touchstart", () => {
+document.addEventListener("keydown", () => {
     if (!started) {
         document.getElementById("level-title").textContent = "Nivel " + level;
         nextSequence();
         started = true;
     }
-}, { once: true });
+});
 
 document.querySelectorAll(".btn").forEach(btn => {
     btn.addEventListener("click", function () {
-        if (!started) return;
         let userChosenColor = this.id;
         userClickedPattern.push(userChosenColor);
         playSound(userChosenColor);
@@ -32,7 +32,7 @@ function nextSequence() {
     gamePattern.push(randomChosenColor);
     let btn = document.getElementById(randomChosenColor);
     btn.classList.add("pressed");
-    setTimeout(() => btn.classList.remove("pressed"), 300);
+    setTimeout(() => btn.classList.remove("pressed"), 200);
     playSound(randomChosenColor);
 }
 
@@ -54,7 +54,9 @@ function checkAnswer(currentLevel) {
         }
     } else {
         playSound("wrong");
-        document.getElementById("level-title").textContent = "¡Game Over! Toca para reiniciar";
+        document.body.classList.add("game-over");
+        document.getElementById("level-title").textContent = "Game Over, presiona cualquier tecla para reiniciar";
+        setTimeout(() => document.body.classList.remove("game-over"), 200);
         startOver();
     }
 }
@@ -63,9 +65,4 @@ function startOver() {
     level = 0;
     gamePattern = [];
     started = false;
-    document.body.addEventListener("touchstart", () => {
-        document.getElementById("level-title").textContent = "Nivel " + level;
-        nextSequence();
-        started = true;
-    }, { once: true });
 }
